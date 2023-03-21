@@ -38,7 +38,7 @@ for line in fname:
 
 # Sort the dictionary by value
 lst = list()
-for key, val in list(emails.items()):
+for key, val in emails.items():
     lst.append((val, key))
 
 lst.sort(reverse=True)
@@ -69,6 +69,40 @@ Enter a file name: mbox-short.txt
 19 1
 """
 
+input_file = input("What is the file name: ")
+try:
+    fname = open(input_file)
+except:
+    print("File not found")
+    exit()
+    
+emails = dict()
+lst = list()
+hours = list()
+hours_dict = dict()
+for line in fname:
+    line = line.rstrip()
+    if not line.startswith("From"):
+        continue
+    else:
+        lst = line.split()
+        if len(lst)>2:
+            hours = lst[5].split(':')
+            if hours[0] not in hours_dict:
+                hours_dict[hours[0]] = 1
+            else:
+                hours_dict[hours[0]] += 1
+
+
+# Sort the dictionary by value
+lst = list()
+for key, val in hours_dict.items():
+    lst.append((key, val))
+
+lst.sort()
+
+for key, val in lst:
+    print(key, val)
 
 
 """
@@ -78,3 +112,36 @@ Your program should not count spaces, digits, punctuation, or anything other tha
 Find text samples from several different languages and see how letter frequency varies between languages. 
 Compare your results with the tables at https://wikipedia.org/wiki/Letter_frequencies.
 """
+
+input_file = input("What is the file name: ")
+try:
+    fname = open(input_file)
+except:
+    print("File not found")
+    exit()
+    
+counts = dict()
+for line in fname:
+    line = list(line.rstrip())
+    for letter in line:
+        if not letter.isalpha():
+            continue
+        else:
+            letter = letter.lower()
+            if letter not in counts:
+                counts[letter] = 1
+            else:
+                counts[letter] += 1
+            
+print(counts)
+# Sort the dictionary by value
+lst = list()
+for key, val in counts.items():
+    lst.append((val, key))
+
+print(lst)
+
+lst.sort(reverse = True)
+
+for val, key in lst:
+    print(key, val)
