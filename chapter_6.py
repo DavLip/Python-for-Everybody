@@ -1,52 +1,43 @@
-"""
-Exercise 1: Write a while loop that starts at the last character in the string and 
-works its way backwards to the first character in the string, printing each letter 
-on a separate line, except backwards.
-"""
-itevar = 0
-fruit = 'apple'
-while itevar < len(fruit):
-    reverse_fruit = fruit[::-1]
-    print(reverse_fruit[itevar])
-    itevar = itevar + 1
-
-"""
-Exercise 3: Encapsulate this code in a function named count, 
-and generalize it so that it accepts the string and the letter as arguments.
-"""
-def count(word, letter):
-    """
-    Count the number of times the parameter called "letter" occurs in the parameter "word".
-    """
-    letter_count = 0
-    for itevar in word:
-        if itevar == letter:
-            letter_count = letter_count + 1
-    print('The letter "'
-    , letter
-    , '" occurs a total of '
-    , letter_count
-    , ' times in the word '
-    ,word
-    ,'.'
-    , sep='')
-
-
-"""
-Exercise 5: Take the following Python code that stores a string:
-
-str = 'X-DSPAM-Confidence:0.8475'
-
-Use find and string slicing to extract the portion of the string after the 
-colon character and then use the float function to convert the extracted string 
-into a floating point number.
+""" 
+Write a program which repeatedly reads numbers until the user enters “done”. 
+Once “done” is entered, print out the total, count, and average of the numbers. 
+If the user enters anything other than a number, 
+    detect their mistake using try and except and print an error message and skip to the next number.
 """
 
-str = 'X-DSPAM-Confidence:0.8475'
-colon_idx = str.find(':')
-num = float(str[colon_idx + 1:])
-print(type(num))
+numbers = []
+while True:
+    numbers_input = input("> ")
+    if numbers_input == "done":
+        break
+    try:
+        numbers_input = int(numbers_input)
+        print("Enter a number:", numbers_input)
+        numbers.append(numbers_input)
+    except:
+        print("Invalid input")
+        
+print(sum(numbers), len(numbers), sum(numbers)/len(numbers))
+
+#################################################################
 
 """
-<class 'float'>
+Write another program that prompts for a list of numbers as above and at the end prints out 
+    both the maximum and minimum of the numbers instead of the average.
 """
+
+
+numbers = []
+while True:
+    numbers_input = input("> ")
+    if numbers_input == "done":
+        break
+    try:
+        numbers_input = int(numbers_input)
+        print("Enter a number:", numbers_input)
+        numbers.append(numbers_input)
+    except:
+        print("Invalid input")
+        
+print("Max entry:", max(numbers))
+print("Min entry:", min(numbers))
